@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Resume Emailer</title>
+</head>
+<body>
+
+    <div>
+    <label for="dest-email">Destination Email</label>
+    <input type="text" id="dest_email">
+  </div>
+
+  <div>
+    <label for="subject">Subject</label>
+    <input type="text" id="subject">
+  </div>
+  <input type="hidden" name="html_file_name" value="/home/students/lperkins/index.html">
+  <input type="hidden" name="from" value="">
+  <button id="send">Send Resume</button>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script>
+    document.getElementById("send").onclick = submit;
+    function submit(e) {
+      var reqBody = {
+        dest_email: document.getElementById("dest_email").value,
+        subject: document.getElementById("subject").value,
+        html_file_name: "/home/students/lperkins/index.html",
+        from: ""
+      };
+      console.log(reqBody);
+      $.ajax({
+        url: "http://fvi-grad.com:4004/resume-emailer",
+        method: "POST",
+        success: function(res) {
+          console.log(res);
+        },
+        data: reqBody
+      })
+    }
+  </script>
+
+  </div>
+
+</body>
+</html>
